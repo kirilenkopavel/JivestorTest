@@ -1,7 +1,10 @@
 import time
+from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+
 from dev.pages.page import BasePage
 
 
@@ -29,11 +32,15 @@ class StrategiesPage(BasePage):
     INPUT_PROFITABILITY = (By.XPATH, '//input[@ng-model="userFilter.viewFields.profitability.value"]')
     CLOSE_INPUT = (By.XPATH, '//span[@class="icon-close-sm"]')
     LANGUAGES = (By.XPATH, '//div[@class="header-language ng-scope"]')
+    FILTER_OPERATOR = (By.XPATH, '//span[@class="main-filter-oper wl-change ng-binding"]')
+    SORTING_UP = (By.XPATH, '//span[@class="rating-age-arrow-prev"]')
+    STRATEGY_NAME = (By.XPATH, '//a[@ui-sref="menuLayout.performance({id: rating.tradeSystem})"]')
 
     def search_strategy(self, strategy_name):
         element = self.driver.find_element(*StrategiesPage.INPUT_SEARCH)
         element.send_keys(strategy_name)
         element.send_keys(Keys.RETURN)
+        time.sleep(3)
 
     def show_more(self):
         element = self.driver.find_element(*StrategiesPage.SHOW_MORE_BUTTON) \
@@ -93,37 +100,75 @@ class StrategiesPage(BasePage):
     def filtration_columns(self, column):
         element = self.driver.find_element(By.XPATH, column) \
             .click()
-        elements = self.driver.find_elements(*StrategiesPage.ICON_FILTRATION)
+        filters = self.driver.find_elements(*StrategiesPage.ICON_FILTRATION)
         if column == "//*[contains(text(), 'Возраст')]":
-            element = elements[0] \
+            element = filters[0] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.age.value"]', 3250)
         elif column == "//*[contains(text(), 'Прирост')]":
-            element = elements[1] \
+            element = filters[1] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.growth.value"]', 14000)
         elif column == "//*[contains(text(), 'Средний за месяц')]":
-            element = elements[2] \
+            element = filters[2] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.avgPerMonth.value"]', 140)
         elif column == "//*[contains(text(), 'Всего пунктов')]":
-            element = elements[3] \
+            element = filters[3] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.totalPips.value"]', 144000)
         elif column == "//*[contains(text(), 'Макс. просадка')]":
-            element = elements[4] \
+            element = filters[4] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.maxDrawDown.value"]', 79)
         elif column == "//*[contains(text(), 'Период просадки')]":
-            element = elements[5] \
+            element = filters[5] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.drawDownDuration.value"]', 630)
         elif column == "//*[contains(text(), 'Реком. минимум')]":
-            element = elements[6] \
+            element = filters[6] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.recommendedMinimum.value"]', 26500)
         else:
-            element = elements[7] \
+            element = filters[7] \
                 .click()
             StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.profitability.value"]', 99)
 
+    def sorting_columns(self, column, direction):
+        element = self.driver.find_element(By.XPATH, column) \
+            .click()
+        wait = WebDriverWait(self.driver, 10)
+        sorting_up = wait.until(EC.presence_of_all_elements_located(
+            (By.XPATH, direction))
+        )
+        try:
+            if column == "//*[contains(text(), 'Возраст')]":
+                element = sorting_up[0] \
+                    .click()
+            elif column == "//*[contains(text(), 'Прирост')]":
+                element = sorting_up[1] \
+                    .click()
+            elif column == "//*[contains(text(), 'Средний за месяц')]":
+                element = sorting_up[2] \
+                    .click()
+            elif column == "//*[contains(text(), 'Всего пунктов')]":
+                element = sorting_up[3] \
+                    .click()
+            elif column == "//*[contains(text(), 'Макс. просадка')]":
+                element = sorting_up[4] \
+                    .click()
+            elif column == "//*[contains(text(), 'Период просадки')]":
+                element = sorting_up[5] \
+                    .click()
+            elif column == "//*[contains(text(), 'Реком. минимум')]":
+                element = sorting_up[6] \
+                    .click()
+            elif column == "//*[contains(text(), 'Сделки в прибыли')]":
+                element = sorting_up[7] \
+                    .click()
+        finally:
+            time.sleep(3)
+
+    def open_strategy_page(self):
+        element = self.driver.find_element(*StrategiesPage.STRATEGY_NAME) \
+            .click()

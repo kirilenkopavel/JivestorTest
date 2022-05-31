@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from dev.pages.data_test import DataTest
@@ -21,6 +23,9 @@ class LoginPage(BasePage):
     EMAIL_RESTORE = (By.ID, 'register_email')
     CAPTCHA_INPUT = (By.ID, 'register_captcha')
     RESTORE_BUTTON = (By.XPATH, '//input[@ng-click="restorePassword(restoreForm)"]')
+    BROKERS_TAB = (By.XPATH, "//*[contains(text(), 'брокеры')]")
+    REGISTERED_BUTTON = (By.XPATH, '//a[@ui-sref="withoutMenuLayout.auth.registration"]')
+    HOME_PAGE_TAB = (By.XPATH, "//*[contains(text(), 'главная')]")
 
     def login_in(self):
         element = self.driver.find_element(*LoginPage.LOGIN_BUTTON) \
@@ -49,6 +54,7 @@ class LoginPage(BasePage):
             .send_keys(*DataTest.PASSWORD)
         element = self.driver.find_element(*LoginPage.RUN_BUTTON) \
             .click()
+        time.sleep(3)
 
     def meet_our_trades(self):
         element = self.driver.find_element(*LoginPage.MEET_OUR_TRADES) \
@@ -72,3 +78,14 @@ class LoginPage(BasePage):
         element = self.driver.find_element(*LoginPage.RESTORE_BUTTON) \
             .click()
 
+    def open_brokers_page(self):
+        element = self.driver.find_element(*LoginPage.BROKERS_TAB) \
+            .click()
+
+    def registered_in(self):
+        element = self.driver.find_element(*LoginPage.REGISTERED_BUTTON) \
+            .click()
+
+    def open_home_page(self):
+        element = self.driver.find_element(*LoginPage.HOME_PAGE_TAB) \
+            .click()
