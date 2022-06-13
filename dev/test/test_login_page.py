@@ -22,26 +22,27 @@ class TestLoginPage(unittest.TestCase):
         self.driver.close()
 
     def test_open_brokers_page(self):
-        page = LoginPage(self.driver)
-        page.open_brokers_page()
+        LoginPage(self.driver).open_brokers_page()
         wait = WebDriverWait(self.driver, 10)
         element = wait.until(EC.presence_of_element_located((By.XPATH, 'register_captcha')))
         self.assertTrue(element)
 
     def test_registered_button(self):
-        page = LoginPage(self.driver)
-        page.registered_in()
+        LoginPage(self.driver).registered_in()
         wait = WebDriverWait(self.driver, 10)
         element = wait.until(EC.presence_of_all_elements_located(
             (By.XPATH, '//a[@ui-sref="menuLayout.connectTraderView({id: broker.id})"]')))
         self.assertTrue(len(element) > 0)
 
     def test_open_home_page(self):
-        page = LoginPage(self.driver)
-        page.open_home_page()
+        LoginPage(self.driver).open_home_page()
         new_window = self.driver.window_handles[1]
         self.driver.switch_to.window(new_window)
         self.assertEqual('https://www.jivestor.com/', self.driver.current_url)
+
+    def test_language_switching(self):
+        LoginPage(self.driver).language_switching()
+        self.assertTrue(len(self.driver.find_elements(*LoginPage.LANGUAGES)) == 15)
 
 
 if __name__ == '__main__':

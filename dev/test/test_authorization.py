@@ -17,10 +17,10 @@ class TestAuthorization(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
-    def test_language_switching(self):
+    def test_language_switching_form(self):
         page = LoginPage(self.driver)
         page.login_in()
-        page.language_switching()
+        page.language_switching_form()
         self.assertTrue(self.driver.find_element(By.XPATH, "//*[contains(text(), 'Login')]"))
 
     def test_authorization(self):

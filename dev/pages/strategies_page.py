@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from dev.pages.page import BasePage
+from dev.pages.user_page import UserPage
 
 
 class StrategiesPage(BasePage):
@@ -14,27 +15,35 @@ class StrategiesPage(BasePage):
     COUNTER_TOP_RANK = (By.XPATH, '//ul[@class="main-tabs-list no-tabs"]/li[1]//span[2]')
     SHOW_MORE_BUTTON = (By.XPATH, '//a[@ng-click="loadMore()"]')
     STRATEGY = (By.XPATH, '//div[@class="rating-rank-data-wrap"]')
-    TOP_RANK = (By.XPATH, "//*[contains(text(), 'Top rank')]")
-    TOP_GROWTH = (By.XPATH, '//a[@href="/traders/growth"]')
-    MY_FAVORITES = (By.XPATH, '//a[@href="/traders/favorites"]')
-    RISING_STARS = (By.XPATH, '//a[@href="/traders/rising-stars"]')
-    TOP_POPULAR = (By.XPATH, '//a[@href="/traders/top-popular"]')
+    TOP_RANK = "//*[contains(text(), 'Top rank')]"
+    TOP_GROWTH = '//a[@href="/traders/growth"]'
+    MY_FAVORITES = '//a[@href="/traders/favorites"]'
+    RISING_STARS = '//a[@href="/traders/rising-stars"]'
+    TOP_POPULAR = '//a[@href="/traders/top-popular"]'
     ICON_FAVORITES = (By.XPATH, '//span[@ng-click="toggleFavorites()"]')
     COUNTER_MY_FAVORITES = (By.XPATH, '//ul[@class="main-tabs-list no-tabs"]/li[3]//span[2]')
     ICON_FILTRATION = (By.XPATH,  '//span[@class="icon-filter"]')
     INPUT_AGE = '//input[@ng-model="userFilter.viewFields.age.value"]'
-    INPUT_GROWTH = (By.XPATH, '//input[@ng-model="userFilter.viewFields.growth.value"]')
-    INPUT_AVG = (By.XPATH, '//input[@ng-model="userFilter.viewFields.avgPerMonth.value"]')
-    INPUT_TOTAL = (By.XPATH, '//input[@ng-model="userFilter.viewFields.totalPips.value"]')
-    INPUT_MAX = (By.XPATH, '//input[@ng-model="userFilter.viewFields.maxDrawDown.value"]')
-    INPUT_DD = (By.XPATH, '//input[@ng-model="userFilter.viewFields.drawDownDuration.value"]')
-    INPUT_RECOMMEN = (By.XPATH, '//input[@ng-model="userFilter.viewFields.recommendedMinimum.value"]')
-    INPUT_PROFITABILITY = (By.XPATH, '//input[@ng-model="userFilter.viewFields.profitability.value"]')
+    INPUT_GROWTH = '//input[@ng-model="userFilter.viewFields.growth.value"]'
+    INPUT_AVG = '//input[@ng-model="userFilter.viewFields.avgPerMonth.value"]'
+    INPUT_TOTAL = '//input[@ng-model="userFilter.viewFields.totalPips.value"]'
+    INPUT_MAX = '//input[@ng-model="userFilter.viewFields.maxDrawDown.value"]'
+    INPUT_DD = '//input[@ng-model="userFilter.viewFields.drawDownDuration.value"]'
+    INPUT_RECOMMEN = '//input[@ng-model="userFilter.viewFields.recommendedMinimum.value"]'
+    INPUT_PROFITABILITY = '//input[@ng-model="userFilter.viewFields.profitability.value"]'
     CLOSE_INPUT = (By.XPATH, '//span[@class="icon-close-sm"]')
     LANGUAGES = (By.XPATH, '//div[@class="header-language ng-scope"]')
     FILTER_OPERATOR = (By.XPATH, '//span[@class="main-filter-oper wl-change ng-binding"]')
     SORTING_UP = (By.XPATH, '//span[@class="rating-age-arrow-prev"]')
     STRATEGY_NAME = (By.XPATH, '//a[@ui-sref="menuLayout.performance({id: rating.tradeSystem})"]')
+    COLUMN_AGE = "//*[contains(text(), 'Возраст')]"
+    COLUMN_GROWTH = "//*[contains(text(), 'Прирост')]"
+    COLUMN_AVG = "//*[contains(text(), 'Средний за месяц')]"
+    COLUMN_TOTAL = "//*[contains(text(), 'Всего пунктов')]"
+    COLUMN_MAX = "//*[contains(text(), 'Макс. просадка')]"
+    COLUMN_DD = "//*[contains(text(), 'Период просадки')]"
+    COLUMN_RECOMMEN = "//*[contains(text(), 'Реком. минимум')]"
+    COLUMN_PROFITABILITY = "//*[contains(text(), 'Сделки в прибыли')]"
 
     def search_strategy(self, strategy_name):
         element = self.driver.find_element(*StrategiesPage.INPUT_SEARCH)
@@ -56,7 +65,7 @@ class StrategiesPage(BasePage):
         elements = self.driver.find_elements(*StrategiesPage.ICON_FAVORITES)
         element = elements[0] \
             .click()
-        element = self.driver.find_element(*StrategiesPage.MY_FAVORITES) \
+        element = self.driver.find_element(By.XPATH, StrategiesPage.MY_FAVORITES) \
             .click()
         time.sleep(2)
 
@@ -72,25 +81,25 @@ class StrategiesPage(BasePage):
 
     def close_input(self, column):
         elements = self.driver.find_elements(*StrategiesPage.CLOSE_INPUT)
-        if column == "//*[contains(text(), 'Возраст')]":
+        if column == StrategiesPage.COLUMN_AGE:
             element = elements[0] \
                 .click()
-        elif column == "//*[contains(text(), 'Прирост')]":
+        elif column == StrategiesPage.COLUMN_GROWTH:
             element = elements[1] \
                 .click()
-        elif column == "//*[contains(text(), 'Средний за месяц')]":
+        elif column == StrategiesPage.COLUMN_AVG:
             element = elements[2] \
                 .click()
-        elif column == "//*[contains(text(), 'Всего пунктов')]":
+        elif column == StrategiesPage.COLUMN_TOTAL:
             element = elements[3] \
                 .click()
-        elif column == "//*[contains(text(), 'Макс. просадка')]":
+        elif column == StrategiesPage.COLUMN_MAX:
             element = elements[4] \
                 .click()
-        elif column == "//*[contains(text(), 'Период просадки')]":
+        elif column == StrategiesPage.COLUMN_DD:
             element = elements[5] \
                 .click()
-        elif column == "//*[contains(text(), 'Реком. минимум')]":
+        elif column == StrategiesPage.COLUMN_RECOMMEN:
             element = elements[6] \
                 .click()
         else:
@@ -100,75 +109,77 @@ class StrategiesPage(BasePage):
     def filtration_columns(self, column):
         element = self.driver.find_element(By.XPATH, column) \
             .click()
-        filters = self.driver.find_elements(*StrategiesPage.ICON_FILTRATION)
-        if column == "//*[contains(text(), 'Возраст')]":
+        wait = WebDriverWait(self.driver, 10)
+        filters = wait.until(EC.presence_of_all_elements_located(StrategiesPage.ICON_FILTRATION))
+        if column == StrategiesPage.COLUMN_AGE:
             element = filters[0] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.age.value"]', 3250)
-        elif column == "//*[contains(text(), 'Прирост')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_AGE, 3250)
+        elif column == StrategiesPage.COLUMN_GROWTH:
             element = filters[1] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.growth.value"]', 14000)
-        elif column == "//*[contains(text(), 'Средний за месяц')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_GROWTH, 14000)
+        elif column == StrategiesPage.COLUMN_AVG:
             element = filters[2] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.avgPerMonth.value"]', 140)
-        elif column == "//*[contains(text(), 'Всего пунктов')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_AVG, 140)
+        elif column == StrategiesPage.COLUMN_TOTAL:
             element = filters[3] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.totalPips.value"]', 144000)
-        elif column == "//*[contains(text(), 'Макс. просадка')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_TOTAL, 144000)
+        elif column == StrategiesPage.COLUMN_MAX:
             element = filters[4] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.maxDrawDown.value"]', 79)
-        elif column == "//*[contains(text(), 'Период просадки')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_MAX, 79)
+        elif column == StrategiesPage.COLUMN_DD:
             element = filters[5] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.drawDownDuration.value"]', 630)
-        elif column == "//*[contains(text(), 'Реком. минимум')]":
+            StrategiesPage.input(self, StrategiesPage.INPUT_DD, 630)
+        elif column == StrategiesPage.COLUMN_RECOMMEN:
             element = filters[6] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.recommendedMinimum.value"]', 26500)
+            StrategiesPage.input(self, StrategiesPage.INPUT_RECOMMEN, 26500)
         else:
             element = filters[7] \
                 .click()
-            StrategiesPage.input(self, '//input[@ng-model="userFilter.viewFields.profitability.value"]', 99)
+            StrategiesPage.input(self, StrategiesPage.INPUT_PROFITABILITY, 99)
 
     def sorting_columns(self, column, direction):
         element = self.driver.find_element(By.XPATH, column) \
             .click()
         wait = WebDriverWait(self.driver, 10)
-        sorting_up = wait.until(EC.presence_of_all_elements_located(
-            (By.XPATH, direction))
-        )
+        sorting_up = wait.until(EC.presence_of_all_elements_located((By.XPATH, direction)))
         try:
-            if column == "//*[contains(text(), 'Возраст')]":
+            if column == StrategiesPage.COLUMN_AGE:
                 element = sorting_up[0] \
                     .click()
-            elif column == "//*[contains(text(), 'Прирост')]":
+            elif column == StrategiesPage.COLUMN_GROWTH:
                 element = sorting_up[1] \
                     .click()
-            elif column == "//*[contains(text(), 'Средний за месяц')]":
+            elif column == StrategiesPage.COLUMN_AVG:
                 element = sorting_up[2] \
                     .click()
-            elif column == "//*[contains(text(), 'Всего пунктов')]":
+            elif column == StrategiesPage.COLUMN_TOTAL:
                 element = sorting_up[3] \
                     .click()
-            elif column == "//*[contains(text(), 'Макс. просадка')]":
+            elif column == StrategiesPage.COLUMN_MAX:
                 element = sorting_up[4] \
                     .click()
-            elif column == "//*[contains(text(), 'Период просадки')]":
+            elif column == StrategiesPage.COLUMN_DD:
                 element = sorting_up[5] \
                     .click()
-            elif column == "//*[contains(text(), 'Реком. минимум')]":
+            elif column == StrategiesPage.COLUMN_RECOMMEN:
                 element = sorting_up[6] \
                     .click()
-            elif column == "//*[contains(text(), 'Сделки в прибыли')]":
+            else:
                 element = sorting_up[7] \
                     .click()
         finally:
             time.sleep(3)
 
     def open_strategy_page(self):
+        element = self.driver.find_element(*UserPage.STRATEGIES_TAB) \
+            .click()
+        time.sleep(5)
         element = self.driver.find_element(*StrategiesPage.STRATEGY_NAME) \
             .click()

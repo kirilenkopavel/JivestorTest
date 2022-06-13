@@ -8,19 +8,20 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from dev.pages.strategies_page import StrategiesPage
+from dev.pages.strategy_page import StrategyPage
 from dev.test.chromedriver import ChromeDriver
 
 
 class TestStrategiesPage(unittest.TestCase):
 
-    columns = {"//*[contains(text(), 'Возраст')]",
-               "//*[contains(text(), 'Прирост')]",
-               "//*[contains(text(), 'Средний за месяц')]",
-               "//*[contains(text(), 'Всего пунктов')]",
-               "//*[contains(text(), 'Макс. просадка')]",
-               "//*[contains(text(), 'Период просадки')]",
-               "//*[contains(text(), 'Реком. минимум')]",
-               "//*[contains(text(), 'Сделки в прибыли')]"
+    columns = {StrategiesPage.COLUMN_AGE,
+               StrategiesPage.COLUMN_GROWTH,
+               StrategiesPage.COLUMN_AVG,
+               StrategiesPage.COLUMN_TOTAL,
+               StrategiesPage.COLUMN_MAX,
+               StrategiesPage.COLUMN_DD,
+               StrategiesPage.COLUMN_RECOMMEN,
+               StrategiesPage.COLUMN_PROFITABILITY
                }
 
     def setUp(self):
@@ -33,37 +34,34 @@ class TestStrategiesPage(unittest.TestCase):
         self.driver.close()
 
     def test_show_more(self):
-        page = StrategiesPage(self.driver)
-        page.show_more()
+        StrategiesPage(self.driver).show_more()
         element = self.driver.find_elements(*StrategiesPage.STRATEGY)
         self.assertEquals(20, len(element))
 
     def test_search_strategy(self):
-        page = StrategiesPage(self.driver)
-        page.search_strategy('Rodax')
+        StrategiesPage(self.driver).search_strategy('Rodax')
         wait = WebDriverWait(self.driver, 10)
-        elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[@class="rating-rank-data-wrap"]')))
+        elements = wait.until(EC.presence_of_all_elements_located(StrategiesPage.STRATEGY))
         self.assertTrue(1 == len(elements))
         counter = self.driver.find_element(*StrategiesPage.COUNTER_TOP_RANK).text
         self.assertEquals('1', counter)
 
     def test_switching_tab(self):
-        tabs = {'//a[@href="/traders/growth"]',
-                '//a[@href="/traders/favorites"]',
-                '//a[@href="/traders/rising-stars"]',
-                '//a[@href="/traders/top-popular"]',
-                "//*[contains(text(), 'Топ рейтинг')]"
+        tabs = {StrategiesPage.TOP_GROWTH,
+                StrategiesPage.MY_FAVORITES,
+                StrategiesPage.RISING_STARS,
+                StrategiesPage.TOP_POPULAR,
+                StrategiesPage.TOP_RANK
                 }
         for tab in tabs:
-            page = StrategiesPage(self.driver)
-            page.switching_tab(self, tab)
-            if tab == '//a[@href="/traders/growth"]':
+            StrategiesPage(self.driver).switching_tab(self, tab)
+            if tab == StrategiesPage.TOP_GROWTH:
                 self.assertEquals('https://dev-py.jivestor.com/traders/growth', self.driver.current_url)
-            elif tab == '//a[@href="/traders/favorites"]':
+            elif tab == StrategiesPage.MY_FAVORITES:
                 self.assertEquals('https://dev-py.jivestor.com/traders/favorites', self.driver.current_url)
-            elif tab == '//a[@href="/traders/rising-stars"]':
+            elif tab == StrategiesPage.RISING_STARS:
                 self.assertEquals('https://dev-py.jivestor.com/traders/rising-stars', self.driver.current_url)
-            elif tab == '//a[@href="/traders/top-popular"]':
+            elif tab == StrategiesPage.TOP_POPULAR:
                 self.assertEquals('https://dev-py.jivestor.com/traders/top-popular', self.driver.current_url)
             else:
                 self.assertEquals('https://dev-py.jivestor.com/traders', self.driver.current_url)
@@ -72,8 +70,8 @@ class TestStrategiesPage(unittest.TestCase):
         page = StrategiesPage(self.driver)
         page.in_favorites()
         page.driver.refresh()
-        wait = WebDriverWait(self.driver, 50)
-        elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[@class="rating-rank-data-wrap"]')))
+        wait = WebDriverWait(self.driver, 10)
+        elements = wait.until(EC.presence_of_all_elements_located(StrategiesPage.STRATEGY))
         self.assertTrue(1 == len(elements))
         self.assertEquals('1', self.driver.find_element(*StrategiesPage.COUNTER_MY_FAVORITES).text)
         page.out_favorites()
@@ -84,10 +82,9 @@ class TestStrategiesPage(unittest.TestCase):
         page = StrategiesPage(self.driver)
         for column in TestStrategiesPage.columns:
             page.filtration_columns(column)
+            time.sleep(3)
             wait = WebDriverWait(self.driver, 10)
-            elements = wait.until(EC.presence_of_all_elements_located(
-                (By.XPATH, '//div[@class="rating-rank-data-wrap"]'))
-            )
+            elements = wait.until(EC.presence_of_all_elements_located(StrategiesPage.STRATEGY))
             self.assertTrue(10 > len(elements))
             page.close_input(column)
             page.driver.refresh()
@@ -97,7 +94,7 @@ class TestStrategiesPage(unittest.TestCase):
         page = StrategiesPage(self.driver)
         for column in TestStrategiesPage.columns:
             wait = WebDriverWait(self.driver, 10)
-            if column == "//*[contains(text(), 'Возраст')]":
+            if column == StrategiesPage.COLUMN_AGE:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -108,17 +105,18 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Прирост')]":
+            elif column == StrategiesPage.COLUMN_GROWTH:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located((By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
+                element_1 = wait.until(EC.presence_of_element_located(
+                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
                 self.assertNotEqual(element, element_1)
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Средний за месяц')]":
+            elif column == StrategiesPage.COLUMN_AVG:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -129,7 +127,7 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Всего пунктов')]":
+            elif column == StrategiesPage.COLUMN_TOTAL:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -140,7 +138,7 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Макс. просадка')]":
+            elif column == StrategiesPage.COLUMN_MAX:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -151,7 +149,7 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Период просадки')]":
+            elif column == StrategiesPage.COLUMN_DD:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -162,7 +160,7 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Реком. минимум')]":
+            elif column == StrategiesPage.COLUMN_RECOMMEN:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -173,7 +171,7 @@ class TestStrategiesPage(unittest.TestCase):
                 element_2 = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]'))).text
                 self.assertNotEqual(element_2, element_1)
-            elif column == "//*[contains(text(), 'Сделки в прибыли')]":
+            elif column == StrategiesPage.COLUMN_PROFITABILITY:
                 element = wait.until(EC.presence_of_element_located(
                     (By.XPATH, '//tr[@class="row-top ng-scope"]/td[9]'))).text
                 page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
@@ -186,10 +184,9 @@ class TestStrategiesPage(unittest.TestCase):
                 self.assertNotEqual(element_2, element_1)
 
     def test_open_strategy_page(self):
-        page = StrategiesPage(self.driver)
-        page.open_strategy_page()
+        StrategiesPage(self.driver).open_strategy_page()
         wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'add to portfolio')]")))
+        element = wait.until(EC.presence_of_element_located(StrategyPage.ADD_TO_NOT))
         self.assertTrue(element)
 
 

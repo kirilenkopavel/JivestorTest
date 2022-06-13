@@ -12,8 +12,10 @@ class LoginPage(BasePage):
     LOGIN = (By.ID, 'login_email')
     PASSWORD = (By.ID, 'login_password')
     RUN_BUTTON = (By.XPATH, '//input[@type="submit"]')
-    RUN_LANGUAGE = (By.ID, 'login_register_language')
-    LANGUAGES = (By.XPATH, '//option[@class="ng-binding ng-scope"]')
+    RUN_LANGUAGE_FORM = (By.ID, 'login_register_language')
+    RUN_LANGUAGE = (By.XPATH, '//span[@class="wl-flag"]')
+    LANGUAGES_FORM = (By.XPATH, '//option[@class="ng-binding ng-scope"]')
+    LANGUAGES = (By.XPATH, '//a[@ng-click="guestSelectLanguage(language)"]')
     BURGER_MENU = (By.XPATH, '//a[@class="open-menu-user"]')
     MEET_OUR_TRADES = (By.XPATH, '//a[@ui-sref="menuLayout.tradeRatingMain"]')
     REGISTERED_TAB = (By.XPATH, '//a[@href="/registration"]')
@@ -26,6 +28,7 @@ class LoginPage(BasePage):
     BROKERS_TAB = (By.XPATH, "//*[contains(text(), 'брокеры')]")
     REGISTERED_BUTTON = (By.XPATH, '//a[@ui-sref="withoutMenuLayout.auth.registration"]')
     HOME_PAGE_TAB = (By.XPATH, "//*[contains(text(), 'главная')]")
+    STRATEGIES_TAB = (By.XPATH, '//a[@ui-sref="menuLayout.tradeRatingMain"]')
 
     def login_in(self):
         element = self.driver.find_element(*LoginPage.LOGIN_BUTTON) \
@@ -41,9 +44,19 @@ class LoginPage(BasePage):
         element = self.driver.find_element(*LoginPage.RUN_BUTTON) \
             .click()
 
-    def language_switching(self):
-        select = Select(self.driver.find_element(*LoginPage.RUN_LANGUAGE)) \
+    def language_switching_form(self):
+        select = Select(self.driver.find_element(*LoginPage.RUN_LANGUAGE_FORM)) \
             .select_by_value('en')
+
+    def language_switching(self):
+        element = self.driver.find_element(*LoginPage.RUN_LANGUAGE) \
+            .click()
+        time.sleep(1)
+        languages = self.driver.find_elements(*LoginPage.LANGUAGES)
+        for language in languages:
+            language.click()
+            time.sleep(1)
+        # return languages
 
     def authorization(self):
         element = self.driver.find_element(*LoginPage.LOGIN_BUTTON) \
@@ -88,4 +101,8 @@ class LoginPage(BasePage):
 
     def open_home_page(self):
         element = self.driver.find_element(*LoginPage.HOME_PAGE_TAB) \
+            .click()
+
+    def open_strategies_page(self):
+        element = self.driver.find_element(*LoginPage.STRATEGIES_TAB) \
             .click()

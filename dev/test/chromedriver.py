@@ -13,3 +13,6 @@ class ChromeDriver:
     # chrome_options.add_argument('--lang=en-GB')
 
     URL = "https://dev-py.jivestor.com/traders"
+    URL_STRATEGY = "https://dev-py.jivestor.com/performance/19613"
+    URL_PROVIDER = "https://dev-py.jivestor.com/profile/f5ea45bed2c5526c5dfafa0a5bd8d039/reviews"
+    
