@@ -52,26 +52,21 @@ class StrategiesPage(BasePage):
         time.sleep(3)
 
     def show_more(self):
-        element = self.driver.find_element(*StrategiesPage.SHOW_MORE_BUTTON) \
-            .click()
+        self.driver.find_element(*StrategiesPage.SHOW_MORE_BUTTON).click()
         time.sleep(7)
 
     def switching_tab(self, tab):
-        element = self.driver.find_element(By.XPATH, tab) \
-            .click()
+        self.driver.find_element(By.XPATH, tab).click()
         time.sleep(2)
 
     def in_favorites(self):
         elements = self.driver.find_elements(*StrategiesPage.ICON_FAVORITES)
-        element = elements[0] \
-            .click()
-        element = self.driver.find_element(By.XPATH, StrategiesPage.MY_FAVORITES) \
-            .click()
+        elements[0].click()
+        self.driver.find_element(By.XPATH, StrategiesPage.MY_FAVORITES).click()
         time.sleep(2)
 
     def out_favorites(self):
-        element = self.driver.find_element(*StrategiesPage.ICON_FAVORITES) \
-            .click()
+        self.driver.find_element(*StrategiesPage.ICON_FAVORITES).click()
 
     def input(self, input_column, value):
         element = self.driver.find_element(By.XPATH, input_column)
@@ -82,104 +77,76 @@ class StrategiesPage(BasePage):
     def close_input(self, column):
         elements = self.driver.find_elements(*StrategiesPage.CLOSE_INPUT)
         if column == StrategiesPage.COLUMN_AGE:
-            element = elements[0] \
-                .click()
+            elements[0].click()
         elif column == StrategiesPage.COLUMN_GROWTH:
-            element = elements[1] \
-                .click()
+            elements[1].click()
         elif column == StrategiesPage.COLUMN_AVG:
-            element = elements[2] \
-                .click()
+            elements[2].click()
         elif column == StrategiesPage.COLUMN_TOTAL:
-            element = elements[3] \
-                .click()
+            elements[3].click()
         elif column == StrategiesPage.COLUMN_MAX:
-            element = elements[4] \
-                .click()
+            elements[4].click()
         elif column == StrategiesPage.COLUMN_DD:
-            element = elements[5] \
-                .click()
+            elements[5].click()
         elif column == StrategiesPage.COLUMN_RECOMMEN:
-            element = elements[6] \
-                .click()
+            elements[6].click()
         else:
-            element = elements[7] \
-                .click()
+            elements[7].click()
 
     def filtration_columns(self, column):
-        element = self.driver.find_element(By.XPATH, column) \
-            .click()
+        self.driver.find_element(By.XPATH, column).click()
         wait = WebDriverWait(self.driver, 10)
         filters = wait.until(EC.presence_of_all_elements_located(StrategiesPage.ICON_FILTRATION))
         if column == StrategiesPage.COLUMN_AGE:
-            element = filters[0] \
-                .click()
+            filters[0].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_AGE, 3250)
         elif column == StrategiesPage.COLUMN_GROWTH:
-            element = filters[1] \
-                .click()
+            filters[1].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_GROWTH, 14000)
         elif column == StrategiesPage.COLUMN_AVG:
-            element = filters[2] \
-                .click()
+            filters[2].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_AVG, 140)
         elif column == StrategiesPage.COLUMN_TOTAL:
-            element = filters[3] \
-                .click()
+            filters[3].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_TOTAL, 144000)
         elif column == StrategiesPage.COLUMN_MAX:
-            element = filters[4] \
-                .click()
+            filters[4].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_MAX, 79)
         elif column == StrategiesPage.COLUMN_DD:
-            element = filters[5] \
-                .click()
+            filters[5].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_DD, 630)
         elif column == StrategiesPage.COLUMN_RECOMMEN:
-            element = filters[6] \
-                .click()
+            filters[6].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_RECOMMEN, 26500)
         else:
-            element = filters[7] \
-                .click()
+            filters[7].click()
             StrategiesPage.input(self, StrategiesPage.INPUT_PROFITABILITY, 99)
 
     def sorting_columns(self, column, direction):
-        element = self.driver.find_element(By.XPATH, column) \
-            .click()
+        self.driver.find_element(By.XPATH, column).click()
         wait = WebDriverWait(self.driver, 10)
         sorting_up = wait.until(EC.presence_of_all_elements_located((By.XPATH, direction)))
         try:
             if column == StrategiesPage.COLUMN_AGE:
-                element = sorting_up[0] \
-                    .click()
+                sorting_up[0].click()
             elif column == StrategiesPage.COLUMN_GROWTH:
-                element = sorting_up[1] \
-                    .click()
+                sorting_up[1].click()
             elif column == StrategiesPage.COLUMN_AVG:
-                element = sorting_up[2] \
-                    .click()
+                sorting_up[2].click()
             elif column == StrategiesPage.COLUMN_TOTAL:
-                element = sorting_up[3] \
-                    .click()
+                sorting_up[3].click()
             elif column == StrategiesPage.COLUMN_MAX:
-                element = sorting_up[4] \
-                    .click()
+                sorting_up[4].click()
             elif column == StrategiesPage.COLUMN_DD:
-                element = sorting_up[5] \
-                    .click()
+                sorting_up[5].click()
             elif column == StrategiesPage.COLUMN_RECOMMEN:
-                element = sorting_up[6] \
-                    .click()
+                sorting_up[6].click()
             else:
-                element = sorting_up[7] \
-                    .click()
+                sorting_up[7].click()
         finally:
             time.sleep(3)
 
     def open_strategy_page(self):
-        element = self.driver.find_element(*UserPage.STRATEGIES_TAB) \
-            .click()
-        time.sleep(5)
-        element = self.driver.find_element(*StrategiesPage.STRATEGY_NAME) \
-            .click()
+        UserPage(self.driver).open_page(UserPage.STRATEGIES_TAB)
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(StrategiesPage.STRATEGY_NAME)).click()

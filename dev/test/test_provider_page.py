@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
 from dev.pages.provider_page import ProviderPage
+from dev.pages.strategy_page import StrategyPage
 from dev.test.chromedriver import ChromeDriver
 
 
@@ -39,10 +40,28 @@ class TestProviderPage(unittest.TestCase):
     def test_open_follower_page(self):
         ProviderPage(self.driver).selected_tab(ProviderPage.COMMENT_TAB)
         wait = WebDriverWait(self.driver, 10)
-        followers = wait.until(EC.visibility_of_all_elements_located(ProviderPage.FOLLOWERS))
+        provider = wait.until(EC.presence_of_element_located(ProviderPage.NAME_PROVIDER)).text
+        followers = wait.until(EC.presence_of_all_elements_located(ProviderPage.FOLLOWERS))
         follower = followers[1] \
             .click()
-        self.assertTrue()
+        follower = wait.until(EC.presence_of_element_located(ProviderPage.NAME_FOLLOWER)).text
+        self.assertNotEquals(provider, follower)
+
+    def test_open_activ_strategies(self):
+        ProviderPage(self.driver).selected_tab(ProviderPage.ACTIV_STRATEGIES_TAB)
+        wait = WebDriverWait(self.driver, 10)
+        strategies = wait.until(EC.presence_of_all_elements_located(ProviderPage.STRATEGY))
+        strategy = strategies[0] \
+            .click()
+        self.assertTrue(wait.until(EC.presence_of_element_located(StrategyPage.ADD_TO_NOT)))
+
+    def test_open_delete_strategies(self):
+        ProviderPage(self.driver).selected_tab(ProviderPage.DELETE_STRATEGIES_TAB)
+        wait = WebDriverWait(self.driver, 10)
+        strategies = wait.until(EC.presence_of_all_elements_located(ProviderPage.STRATEGY))
+        strategy = strategies[0] \
+            .click()
+        self.assertTrue(wait.until(EC.presence_of_element_located(ProviderPage.DELETE_STRATEGY)))
 
 
 if __name__ == '__main__':

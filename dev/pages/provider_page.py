@@ -19,10 +19,12 @@ class ProviderPage(BasePage):
     TABLE_DELETE_STRATEGIES = (By.XPATH, "//*[contains(text(), 'Удалено')]")
     FOLLOWERS = (By.XPATH, '//img[@class="wl-max-size ng-scope"]')
     NAME_PROVIDER = (By.XPATH, '//ul[@class="main-info-list"]/li[1]/strong[1]')
+    NAME_FOLLOWER = (By.XPATH, '//ul[@class="main-info-list"]/li[1]/strong')
+    STRATEGY = (By.XPATH, '//a[@class="wl-user-profile-system-link ng-binding"]')
+    DELETE_STRATEGY = (By.XPATH, '//h1[@ng-if="tradeSystem.deleted"]')
 
     def selected_tab(self, tab):
         element = self.driver.find_element(By.XPATH, tab) \
             .click()
 
-    def open_follower_page(self, follower):
-        element = self.driver.find_element(follower)
+

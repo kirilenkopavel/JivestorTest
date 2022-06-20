@@ -1,7 +1,9 @@
+import unittest
+
 from selenium.webdriver.chrome import webdriver
 
 
-class ChromeDriver:
+class ChromeDriver(unittest.TestCase):
 
     chrome_options = webdriver.Options()
     # chrome_options.add_argument('--headless')
@@ -15,4 +17,5 @@ class ChromeDriver:
     URL = "https://dev-py.jivestor.com/traders"
     URL_STRATEGY = "https://dev-py.jivestor.com/performance/19613"
     URL_PROVIDER = "https://dev-py.jivestor.com/profile/f5ea45bed2c5526c5dfafa0a5bd8d039/reviews"
-    
+
+

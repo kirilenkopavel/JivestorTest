@@ -5,6 +5,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from dev.pages.data_test import DataTest
 from dev.pages.page import BasePage
 from dev.pages.portfolio_page import PortfolioPage
 from dev.pages.strategies_page import StrategiesPage
@@ -58,117 +59,96 @@ class StrategyPage(BasePage):
     FOLLOWERS = (By.XPATH, '//span[@class="follower-name ng-binding"]')
 
     def view_followers(self):
-        element = self.driver.find_element(*StrategyPage.FOLLOWERS_BUTTON) \
-            .click()
+        self.driver.find_element(*StrategyPage.FOLLOWERS_BUTTON).click()
 
     def selection_period(self, period):
         wait = WebDriverWait(self.driver, 10)
-        elements = wait.until(EC.presence_of_element_located((By.XPATH, period))) \
-            .click()
-        element = wait.until(EC.presence_of_element_located(StrategyPage.RELOAD_BUTTON)) \
-            .click()
+        wait.until(EC.presence_of_element_located((By.XPATH, period))).click()
+        wait.until(EC.presence_of_element_located(StrategyPage.RELOAD_BUTTON)).click()
         time.sleep(2)
 
     def open_provider_page(self):
-        element = self.driver.find_element(*StrategyPage.PROVIDER_NAME) \
-            .click()
+        self.driver.find_element(*StrategyPage.PROVIDER_NAME).click()
 
     def share_strategy(self):
-        element = self.driver.find_element(*StrategyPage.SHARE_BUTTON) \
-            .click()
+        self.driver.find_element(*StrategyPage.SHARE_BUTTON).click()
 
     def add_strategy(self):
-        element = self.driver.find_element(*StrategyPage.ADD_TO_NOT) \
-            .click()
+        self.driver.find_element(*StrategyPage.ADD_TO_NOT).click()
 
     def add_strategy_user(self):
-        element = self.driver.find_element(*StrategyPage.ADD_TO) \
-            .click()
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(StrategyPage.ADD_TO)).click()
 
     def in_login(self):
-        element = self.driver.find_element(*StrategyPage.LOGIN_BUTTON) \
-            .click()
+        self.driver.find_element(*StrategyPage.LOGIN_BUTTON).click()
 
     def in_register(self):
-        element = self.driver.find_element(*StrategyPage.REGISTER_BUTTON) \
-            .click()
+        self.driver.find_element(*StrategyPage.REGISTER_BUTTON).click()
 
     def select_account(self, account):
-        select = Select(self.driver.find_element(*StrategyPage.TRADING_ACCOUNTS_SELECT)) \
-            .select_by_value(account)
+        Select(self.driver.find_element(*StrategyPage.TRADING_ACCOUNTS_SELECT)).select_by_value(account)
 
     def toggle_settings(self, type_settings):
         wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.presence_of_element_located((By.XPATH, type_settings))) \
-            .click()
+        wait.until(EC.presence_of_element_located((By.XPATH, type_settings))).click()
         time.sleep(3)
 
     def check_copy(self, value):
-        element = self.driver.find_element(*StrategyPage.CHECK_COPY) \
-            .click()
+        self.driver.find_element(*StrategyPage.CHECK_COPY).click()
         time.sleep(3)
-        """time.sleep(5)
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.presence_of_element_located(StrategyPage.COPY_OPTIONS)) \
-            .click()
-        element = self.driver.find_element(By.XPATH, value) \
-            .click()"""
-        select = Select(self.driver.find_element(*StrategyPage.COPY_OPTIONS)) \
-            .select_by_value(value)
+        Select(self.driver.find_element(*StrategyPage.COPY_OPTIONS)).select_by_value(value)
 
     def save(self):
-        element = self.driver.find_element(*StrategyPage.SUBMIT) \
-            .click()
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(StrategyPage.SUBMIT)).click()
 
     def in_portfolio(self):
-        element = self.driver.find_element(*StrategyPage.IN_PORTFOLIO) \
-            .click()
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(StrategyPage.IN_PORTFOLIO)).click()
 
     def input_lot(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_LOT) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_LOT).send_keys(value)
 
     def input_lot_min(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_LOT_MIN) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_LOT_MIN).send_keys(value)
 
     def input_lot_max(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_LOT_MAX) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_LOT_MAX).send_keys(value)
 
     def input_fixed_stop(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_FIXED_STOP) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_FIXED_STOP).send_keys(value)
 
     def input_fixed_take(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_FIXED_TAKE) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_FIXED_TAKE).send_keys(value)
 
     def input_stop_out(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_STOP_OUT) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_STOP_OUT).send_keys(value)
 
     def input_worst_dev(self, value):
-        element = self.driver.find_element(*StrategyPage.INPUT_WORST_DEV) \
-            .send_keys(value)
+        self.driver.find_element(*StrategyPage.INPUT_WORST_DEV).send_keys(value)
 
     def check_limit_trade(self, value1, value2):
-        element = self.driver.find_element(*StrategyPage.LIMIT_TRADE_CHECK) \
-            .click()
-        element = self.driver.find_element(*StrategyPage.INPUT_LIMIT_TRADE) \
-            .send_keys(value1)
-        element = self.driver.find_element(*StrategyPage.INPUT_EQUITY) \
-            .send_keys(value2)
+        self.driver.find_element(*StrategyPage.LIMIT_TRADE_CHECK).click()
+        self.driver.find_element(*StrategyPage.INPUT_LIMIT_TRADE).send_keys(value1)
+        self.driver.find_element(*StrategyPage.INPUT_EQUITY).send_keys(value2)
 
     def check_flipped_trading(self):
-        element = self.driver.find_element(*StrategyPage.CHECK_FLIPPED_TRADING) \
-            .click()
+        self.driver.find_element(*StrategyPage.CHECK_FLIPPED_TRADING).click()
 
     def in_favorites(self):
-        element = self.driver.find_element(*StrategyPage.ICON_FAVORITES) \
-            .click()
+        self.driver.find_element(*StrategyPage.ICON_FAVORITES).click()
 
     def open_strategy(self):
-        element = self.driver.find_element(*StrategiesPage.STRATEGY_NAME) \
-            .click()
+        self.driver.find_element(*StrategiesPage.STRATEGY_NAME).click()
+
+    def add_in_portfolio(self):
+        StrategiesPage(self.driver).open_strategy_page()
+        time.sleep(3)
+        page = StrategyPage(self.driver)
+        page.add_strategy_user()
+        time.sleep(3)
+        page.save()
+        page.in_portfolio()
+
 
