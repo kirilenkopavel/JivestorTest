@@ -70,5 +70,5 @@ class NavigationUser(BasePage):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.presence_of_element_located(NavigationUser.SELECT_WL)).click()
         self.driver.find_element(*wl).click()
-        time.sleep(5)
+        time.sleep(9)
 
