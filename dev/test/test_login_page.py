@@ -1,7 +1,6 @@
 import unittest
 
 from selenium.webdriver.chrome import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -24,15 +23,14 @@ class TestLoginPage(unittest.TestCase):
     def test_open_brokers_page(self):
         LoginPage(self.driver).open_brokers_page()
         wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.presence_of_element_located((By.XPATH, 'register_captcha')))
-        self.assertTrue(element)
+        broker = wait.until(EC.presence_of_all_elements_located(LoginPage.BROKER))
+        self.assertTrue(len(broker) > 0)
 
     def test_registered_button(self):
         LoginPage(self.driver).registered_in()
         wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.presence_of_all_elements_located(
-            (By.XPATH, '//a[@ui-sref="menuLayout.connectTraderView({id: broker.id})"]')))
-        self.assertTrue(len(element) > 0)
+        element = wait.until(EC.presence_of_all_elements_located(LoginPage.CAPTCHA_INPUT))
+        self.assertTrue(element)
 
     def test_open_home_page(self):
         LoginPage(self.driver).open_home_page()

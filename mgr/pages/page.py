@@ -2,11 +2,14 @@ import random
 import time
 
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage(object):
+
+    NUMBERS_PAGE = (By.XPATH, '//button[@role="menuitemradio"]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -44,5 +47,5 @@ class BasePage(object):
     def sort_by(self, sorting_type):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.presence_of_element_located(sorting_type)).click()
-        time.sleep(9)
+        time.sleep(12)
 

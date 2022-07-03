@@ -24,6 +24,13 @@ class TestStrategiesPage(unittest.TestCase):
                StrategiesPage.COLUMN_PROFITABILITY
                }
 
+    tabs = {StrategiesPage.TOP_GROWTH,
+            StrategiesPage.MY_FAVORITES,
+            StrategiesPage.RISING_STARS,
+            StrategiesPage.TOP_POPULAR,
+            StrategiesPage.TOP_RANK
+            }
+
     def setUp(self):
         self.driver = webdriver.WebDriver(ChromeDriverManager().install(),
                                           chrome_options=ChromeDriver.chrome_options)
@@ -47,13 +54,7 @@ class TestStrategiesPage(unittest.TestCase):
         self.assertEquals('1', counter)
 
     def test_switching_tab(self):
-        tabs = {StrategiesPage.TOP_GROWTH,
-                StrategiesPage.MY_FAVORITES,
-                StrategiesPage.RISING_STARS,
-                StrategiesPage.TOP_POPULAR,
-                StrategiesPage.TOP_RANK
-                }
-        for tab in tabs:
+        for tab in TestStrategiesPage.tabs:
             StrategiesPage(self.driver).switching_tab(self, tab)
             if tab == StrategiesPage.TOP_GROWTH:
                 self.assertEquals('https://dev-py.jivestor.com/traders/growth', self.driver.current_url)
@@ -95,92 +96,68 @@ class TestStrategiesPage(unittest.TestCase):
         for column in TestStrategiesPage.columns:
             wait = WebDriverWait(self.driver, 10)
             if column == StrategiesPage.COLUMN_AGE:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.AGE)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.AGE)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.AGE)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_GROWTH:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.GROWTH)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.GROWTH)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.GROWTH)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_AVG:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.AVG)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.AVG)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.AVG)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_TOTAL:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.TOTAL)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.TOTAL)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.TOTAL)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_MAX:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.MAX)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.MAX)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.MAX)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_DD:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.DD)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.DD)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.DD)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_RECOMMEN:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.RECOMMEN)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.RECOMMEN)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.RECOMMEN)).text
                 self.assertNotEqual(element_2, element_1)
             elif column == StrategiesPage.COLUMN_PROFITABILITY:
-                element = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[9]'))).text
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-prev\"]")
-                element_1 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[9]'))).text
+                element = wait.until(EC.presence_of_element_located(StrategiesPage.PROFITABILITY)).text
+                page.sorting_columns(column, StrategiesPage.DOWN_ICON)
+                element_1 = wait.until(EC.presence_of_element_located(StrategiesPage.PROFITABILITY)).text
                 self.assertNotEqual(element, element_1)
-                page.sorting_columns(column, "//span[@class=\"rating-age-arrow-next\"]")
-                element_2 = wait.until(EC.presence_of_element_located(
-                    (By.XPATH, '//tr[@class="row-top ng-scope"]/td[9]'))).text
+                page.sorting_columns(column, StrategiesPage.UP_ICON)
+                element_2 = wait.until(EC.presence_of_element_located(StrategiesPage.PROFITABILITY)).text
                 self.assertNotEqual(element_2, element_1)
 
     def test_open_strategy_page(self):

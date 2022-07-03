@@ -222,6 +222,5 @@ class TestAccountsManager(unittest.TestCase):
             self.assertEqual(str(new_comments), counter)
 
 
-
 if __name__ == '__main__':
     unittest.main()

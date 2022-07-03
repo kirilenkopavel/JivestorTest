@@ -5,24 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a9956d4-aeb9-4421-88d3-21d6f491c816" name="Changes" comment="20.06.22">
-      <change afterPath="$PROJECT_DIR$/dev/pages/live_account_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/pages/statements_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/test/test_live_account_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/test/test_ststements_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/test/test_user_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mgr/pages/accounts_manager_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mgr/test/test_accounts_manager_page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mgr/test/moderation_page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mgr/test/test_demo_accounts_page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mgr/test/test_trading_strategies_page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mgr/test/test_who_follows_whom_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/pages/data_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/pages/data_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/pages/trading_terminal_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/pages/trading_terminal_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/pages/user_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/pages/user_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/test/test_trading_terminal_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_trading_terminal_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mgr/pages/data_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/data_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mgr/pages/navigation_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/navigation_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/pages/login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/pages/login_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/pages/strategies_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/pages/strategies_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/chromedriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/chromedriver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/test_authorization.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_authorization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/test_login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_login_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/test_portfolio_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_portfolio_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/test_strategies_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_strategies_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/test/test_user_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/test/test_user_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mgr/pages/accounts_manager_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/accounts_manager_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mgr/pages/login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/login_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mgr/pages/page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mgr/pages/registered_users_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/pages/registered_users_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mgr/test/chromedriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/test/chromedriver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mgr/test/test_registered_users_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/test/test_registered_users_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mgr/test/test_accounts_manager_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/mgr/test/test_accounts_manager_page.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +33,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Blank Requirements File" />
-        <option value="Python Script" />
         <option value="Python Unit Test" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
       </GitPushTagMode>
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -69,7 +69,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Professional/IdeaProjects/JivestorTest/mgr/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Professional/IdeaProjects/JivestorTest/dev/test&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
@@ -84,8 +84,36 @@
       <recent name="C:\Users\Professional\IdeaProjects\JivestorTest" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_add_comment">
-    <configuration name="Python tests for test_accounts_manager_page.TestAccountsManager.test_add_comment" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for test_strategies_page.TestStrategiesPage.test_sorting_columns">
+    <configuration name="Python tests for test_authorization.TestAuthorization.test_authorization" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="JivestorTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_authorization.TestAuthorization.test_authorization&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_authorization.TestAuthorization.test_language_switching_form" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="JivestorTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_authorization.TestAuthorization.test_language_switching_form&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_demo_accounts_page.TestDemoAccounts.test_sorting_display_name" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JivestorTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -95,11 +123,25 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_accounts_manager_page.TestAccountsManager.test_add_comment&quot;" />
+      <option name="_new_target" value="&quot;test_demo_accounts_page.TestDemoAccounts.test_sorting_display_name&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_accounts_manager_page.TestAccountsManager.test_add_new_account" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_strategies_page.TestStrategiesPage.test_sorting_columns" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="JivestorTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_strategies_page.TestStrategiesPage.test_sorting_columns&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_who_follows_whom_page.TestWhoFollowsWhom.test_search_account" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="JivestorTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -109,58 +151,31 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_accounts_manager_page.TestAccountsManager.test_add_new_account&quot;" />
+      <option name="_new_target" value="&quot;test_who_follows_whom_page.TestWhoFollowsWhom.test_search_account&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_accounts_manager_page.TestAccountsManager.test_approved_account" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="JivestorTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mgr/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_accounts_manager_page.TestAccountsManager.test_approved_account&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_accounts_manager_page.TestAccountsManager.test_open_add_account_page" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="JivestorTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mgr/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_accounts_manager_page.TestAccountsManager.test_open_add_account_page&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_accounts_manager_page.TestAccountsManager.test_rejected_account" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="JivestorTest" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mgr/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_accounts_manager_page.TestAccountsManager.test_rejected_account&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests" type="tests" factoryName="Unittests" nameIsGenerated="true">
+    <configuration name="Unittests_dev" type="tests" factoryName="Unittests">
       <module name="JivestorTest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="C:\Users\Professional\IdeaProjects\JivestorTest\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev/test" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_pattern" value="&quot;discover&quot;" />
+      <option name="_new_additionalArguments" value="&quot;discover&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;CUSTOM&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests_mgr" type="tests" factoryName="Unittests">
+      <module name="JivestorTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\Professional\IdeaProjects\JivestorTest\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mgr/test" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -171,20 +186,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests" />
-      <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_add_comment" />
-      <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_add_new_account" />
-      <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_approved_account" />
-      <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_open_add_account_page" />
-      <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_rejected_account" />
+      <item itemvalue="Python tests.Unittests_mgr" />
+      <item itemvalue="Python tests.Unittests_dev" />
+      <item itemvalue="Python tests.Python tests for test_authorization.TestAuthorization.test_language_switching_form" />
+      <item itemvalue="Python tests.Python tests for test_demo_accounts_page.TestDemoAccounts.test_sorting_display_name" />
+      <item itemvalue="Python tests.Python tests for test_strategies_page.TestStrategiesPage.test_sorting_columns" />
+      <item itemvalue="Python tests.Python tests for test_who_follows_whom_page.TestWhoFollowsWhom.test_search_account" />
+      <item itemvalue="Python tests.Python tests for test_authorization.TestAuthorization.test_authorization" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_add_comment" />
-        <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_rejected_account" />
-        <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_add_new_account" />
-        <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_approved_account" />
-        <item itemvalue="Python tests.Python tests for test_accounts_manager_page.TestAccountsManager.test_open_add_account_page" />
+        <item itemvalue="Python tests.Python tests for test_strategies_page.TestStrategiesPage.test_sorting_columns" />
+        <item itemvalue="Python tests.Python tests for test_authorization.TestAuthorization.test_language_switching_form" />
+        <item itemvalue="Python tests.Python tests for test_authorization.TestAuthorization.test_authorization" />
+        <item itemvalue="Python tests.Python tests for test_who_follows_whom_page.TestWhoFollowsWhom.test_search_account" />
+        <item itemvalue="Python tests.Python tests for test_demo_accounts_page.TestDemoAccounts.test_sorting_display_name" />
       </list>
     </recent_temporary>
   </component>
@@ -230,21 +246,5 @@
     <MESSAGE value="31.05.22" />
     <MESSAGE value="20.06.22" />
     <option name="LAST_COMMIT_MESSAGE" value="20.06.22" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dev/test/test_login_page.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dev/test/test_user_page.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

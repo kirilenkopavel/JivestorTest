@@ -75,6 +75,8 @@ class TestPortfolio(unittest.TestCase):
         wait = WebDriverWait(self.driver, 5)
         LoginPage(self.driver).authorization()
         UserPage(self.driver).open_page(UserPage.PORTFOLIO_TAB)
+        self.driver.refresh()
+        time.sleep(5)
         try:
             wait.until(EC.visibility_of_element_located(PortfolioPage.STRATEGY))
         except TimeoutException:

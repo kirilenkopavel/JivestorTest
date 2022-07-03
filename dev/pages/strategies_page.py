@@ -44,6 +44,16 @@ class StrategiesPage(BasePage):
     COLUMN_DD = "//*[contains(text(), 'Период просадки')]"
     COLUMN_RECOMMEN = "//*[contains(text(), 'Реком. минимум')]"
     COLUMN_PROFITABILITY = "//*[contains(text(), 'Сделки в прибыли')]"
+    DOWN_ICON = (By.XPATH, '//span[@class="rating-age-arrow-prev"]')
+    UP_ICON = (By.XPATH, '//span[@class="rating-age-arrow-next"]')
+    AGE = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[2]')
+    GROWTH = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[3]')
+    AVG = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[4]')
+    TOTAL = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[5]')
+    MAX = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[6]')
+    DD = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[7]')
+    RECOMMEN = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[8]')
+    PROFITABILITY = (By.XPATH, '//tr[@class="row-top ng-scope"]/td[9]')
 
     def search_strategy(self, strategy_name):
         element = self.driver.find_element(*StrategiesPage.INPUT_SEARCH)
@@ -125,7 +135,7 @@ class StrategiesPage(BasePage):
     def sorting_columns(self, column, direction):
         self.driver.find_element(By.XPATH, column).click()
         wait = WebDriverWait(self.driver, 10)
-        sorting_up = wait.until(EC.presence_of_all_elements_located((By.XPATH, direction)))
+        sorting_up = wait.until(EC.presence_of_all_elements_located(direction))
         try:
             if column == StrategiesPage.COLUMN_AGE:
                 sorting_up[0].click()
