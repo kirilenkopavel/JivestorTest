@@ -29,80 +29,60 @@ class LoginPage(BasePage):
     REGISTERED_BUTTON = (By.XPATH, '//a[@ui-sref="withoutMenuLayout.auth.registration"]')
     HOME_PAGE_TAB = (By.XPATH, "//*[contains(text(), 'главная')]")
     STRATEGIES_TAB = (By.XPATH, '//a[@ui-sref="menuLayout.tradeRatingMain"]')
+    BROKER = (By.XPATH, '//a[@ui-sref="menuLayout.connectTraderView({id: broker.id})"]')
+    HEADER_FORM = (By.XPATH, "//h3[contains(text(), 'Login')]")
 
     def login_in(self):
-        element = self.driver.find_element(*LoginPage.LOGIN_BUTTON) \
-            .click()
+        self.driver.find_element(*LoginPage.LOGIN_BUTTON).click()
 
     def input_login_form(self):
-        element = self.driver.find_element(*LoginPage.LOGIN) \
-            .send_keys(*DataTest.EMAIL)
-        element = self.driver.find_element(*LoginPage.PASSWORD) \
-            .send_keys(*DataTest.PASSWORD)
+        self.driver.find_element(*LoginPage.LOGIN).send_keys(*DataTest.EMAIL)
+        self.driver.find_element(*LoginPage.PASSWORD).send_keys(*DataTest.PASSWORD)
 
     def submit(self):
-        element = self.driver.find_element(*LoginPage.RUN_BUTTON) \
-            .click()
+        self.driver.find_element(*LoginPage.RUN_BUTTON).click()
 
     def language_switching_form(self):
-        select = Select(self.driver.find_element(*LoginPage.RUN_LANGUAGE_FORM)) \
-            .select_by_value('en')
+        Select(self.driver.find_element(*LoginPage.RUN_LANGUAGE_FORM)).select_by_value('en')
 
     def language_switching(self):
-        element = self.driver.find_element(*LoginPage.RUN_LANGUAGE) \
-            .click()
+        self.driver.find_element(*LoginPage.RUN_LANGUAGE).click()
         time.sleep(1)
         languages = self.driver.find_elements(*LoginPage.LANGUAGES)
         for language in languages:
             language.click()
             time.sleep(1)
-        # return languages
 
     def authorization(self):
-        element = self.driver.find_element(*LoginPage.LOGIN_BUTTON) \
-            .click()
-        element = self.driver.find_element(*LoginPage.LOGIN) \
-            .send_keys(*DataTest.EMAIL)
-        element = self.driver.find_element(*LoginPage.PASSWORD) \
-            .send_keys(*DataTest.PASSWORD)
-        element = self.driver.find_element(*LoginPage.RUN_BUTTON) \
-            .click()
+        self.driver.find_element(*LoginPage.LOGIN_BUTTON).click()
+        self.driver.find_element(*LoginPage.LOGIN).send_keys(*DataTest.EMAIL)
+        self.driver.find_element(*LoginPage.PASSWORD).send_keys(*DataTest.PASSWORD)
+        self.driver.find_element(*LoginPage.RUN_BUTTON).click()
         time.sleep(3)
 
     def meet_our_trades(self):
-        element = self.driver.find_element(*LoginPage.MEET_OUR_TRADES) \
-            .click()
+        self.driver.find_element(*LoginPage.MEET_OUR_TRADES).click()
 
     def in_registered_tab(self):
-        element = self.driver.find_element(*LoginPage.REGISTERED_TAB) \
-            .click()
+        self.driver.find_element(*LoginPage.REGISTERED_TAB).click()
 
     def in_login_tab(self):
-        element = self.driver.find_element(*LoginPage.LOGIN_TAB) \
-            .click()
+        self.driver.find_element(*LoginPage.LOGIN_TAB).click()
 
     def forgot_password(self):
-        element = self.driver.find_element(*LoginPage.FORGOT_PASSWORD) \
-            .click()
-        element = self.driver.find_element(*LoginPage.EMAIL_RESTORE) \
-            .send_keys(*DataTest.EMAIL)
-        element = self.driver.find_element(*LoginPage.CAPTCHA_INPUT) \
-            .send_keys('123456')
-        element = self.driver.find_element(*LoginPage.RESTORE_BUTTON) \
-            .click()
+        self.driver.find_element(*LoginPage.FORGOT_PASSWORD).click()
+        self.driver.find_element(*LoginPage.EMAIL_RESTORE).send_keys(*DataTest.EMAIL)
+        self.driver.find_element(*LoginPage.CAPTCHA_INPUT).send_keys('123456')
+        self.driver.find_element(*LoginPage.RESTORE_BUTTON).click()
 
     def open_brokers_page(self):
-        element = self.driver.find_element(*LoginPage.BROKERS_TAB) \
-            .click()
+        self.driver.find_element(*LoginPage.BROKERS_TAB).click()
 
     def registered_in(self):
-        element = self.driver.find_element(*LoginPage.REGISTERED_BUTTON) \
-            .click()
+        self.driver.find_element(*LoginPage.REGISTERED_BUTTON).click()
 
     def open_home_page(self):
-        element = self.driver.find_element(*LoginPage.HOME_PAGE_TAB) \
-            .click()
+        self.driver.find_element(*LoginPage.HOME_PAGE_TAB).click()
 
     def open_strategies_page(self):
-        element = self.driver.find_element(*LoginPage.STRATEGIES_TAB) \
-            .click()
+        self.driver.find_element(*LoginPage.STRATEGIES_TAB).click()

@@ -21,7 +21,7 @@ class TestAuthorization(unittest.TestCase):
         page = LoginPage(self.driver)
         page.login_in()
         page.language_switching_form()
-        self.assertTrue(self.driver.find_element(By.XPATH, "//*[contains(text(), 'Login')]"))
+        self.assertTrue(self.driver.find_element(*LoginPage.HEADER_FORM))
 
     def test_authorization(self):
         page = LoginPage(self.driver)
@@ -40,7 +40,7 @@ class TestAuthorization(unittest.TestCase):
         page = LoginPage(self.driver)
         page.login_in()
         page.in_registered_tab()
-        self.assertTrue(self.driver.find_element(By.XPATH, '//div[@class="captcha-img"]'))
+        self.assertTrue(self.driver.find_element(*LoginPage.CAPTCHA_INPUT))
         page.in_login_tab()
         self.assertTrue(self.driver.find_element(*LoginPage.REMEMBER_CHECK))
 

@@ -12,7 +12,6 @@ class ChromeDriver(unittest.TestCase):
     chrome_options.add_argument('--disable-web-security')
     chrome_options.add_argument('--start-maximized')
     chrome_options.add_argument('--incognito')
-    # chrome_options.add_argument('--lang=en-GB')
 
     URL = "https://dev-py.jivestor.com/traders"
     URL_STRATEGY = "https://dev-py.jivestor.com/performance/19613"

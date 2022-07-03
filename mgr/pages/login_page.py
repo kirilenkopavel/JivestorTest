@@ -12,10 +12,7 @@ class LoginPage(BasePage):
     LOGOUT = (By.ID, 'logout')
 
     def authorization(self):
-        element = self.driver.find_element(*LoginPage.INPUT_LOGIN) \
-            .send_keys(*DataTest.EMAIL)
-        element = self.driver.find_element(*LoginPage.INPUT_PASSWORD) \
-            .send_keys(*DataTest.PASSWORD)
-        element = self.driver.find_element(*LoginPage.SUBMIT) \
-            .click()
+        self.driver.find_element(*LoginPage.INPUT_LOGIN).send_keys(*DataTest.EMAIL)
+        self.driver.find_element(*LoginPage.INPUT_PASSWORD).send_keys(*DataTest.PASSWORD)
+        self.driver.find_element(*LoginPage.SUBMIT).click()
 

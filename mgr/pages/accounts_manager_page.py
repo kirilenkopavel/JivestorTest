@@ -4,7 +4,6 @@ import time
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.devtools.v101.indexed_db import Key
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -31,7 +30,7 @@ class AccountsManager(BasePage):
     BROKER_FILTER = (By.XPATH, "//a[contains(text(), 'Search by Broker')]")
     INPUT_SEARCH = (By.XPATH, '//input[@class="search form-control form-control-sm"]')
     SEARCH_BUTTON = (By.XPATH, '//a[@class="btn-sm btn-secondary mr-2"]')
-    NUMBERS_PAGE = (By.XPATH, '//button[@role="menuitemradio"]')
+
     SORTING_DATE = (By.XPATH, '//th[@aria-colindex="2"]/div')
     ADD_NEW_ACCOUNT = (By.XPATH, '//a[@class="btn-sm btn-success mr-2"]')
     HEADER = (By.XPATH, '//h4[@class="mb-0 font-size-18"]')
@@ -53,7 +52,6 @@ class AccountsManager(BasePage):
     EMAIL_INPUT = (By.XPATH, '//form[@id="create-an-account-manager"]//input[@type="email"]')
     WL_INPUT = (By.XPATH, '//*[@id="create-an-account-manager"]//input[@placeholder="Choose a WL"]')
     WL_DEV_PY = (By.XPATH, "//span[contains(text(), 'DEV-PY')]")
-
 
     def switching_tabs(self, tab):
         wait = WebDriverWait(self.driver, 10)
