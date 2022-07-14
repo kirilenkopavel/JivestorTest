@@ -90,8 +90,57 @@ class TestTradingTerminal(unittest.TestCase):
         UserPage(self.driver).open_page(UserPage.TRADING_TERMINAL_TAB)
         self.driver.refresh()
         time.sleep(9)
-        wait = WebDriverWait(self.driver, 10)
-        TradingTerminalPage(self.driver).open_trade(TradingTerminalPage.SELL_BUTTON, ',1')
+        page = TradingTerminalPage(self.driver)
+        page.close_all_trades()
+        page.open_trade(TradingTerminalPage.SELL_BUTTON, ',1')
+        self.assertTrue(page.review_trade() == 1)
+
+    def test_open_trade_bay(self):
+        LoginPage(self.driver).authorization()
+        UserPage(self.driver).open_page(UserPage.TRADING_TERMINAL_TAB)
+        self.driver.refresh()
+        time.sleep(9)
+        page = TradingTerminalPage(self.driver)
+        page.close_all_trades()
+        page.open_trade(TradingTerminalPage.BAY_BUTTON, ',1')
+        self.assertTrue(page.review_trade() == 1)
+
+    def test_close_trade(self):
+        LoginPage(self.driver).authorization()
+        UserPage(self.driver).open_page(UserPage.TRADING_TERMINAL_TAB)
+        self.driver.refresh()
+        page = TradingTerminalPage(self.driver)
+        page.close_all_trades()
+        counter = page.counter_close_trade()
+        page.open_trade(TradingTerminalPage.BAY_BUTTON, ',1')
+        trades = page.review_trade()
+        page.close_trades()
+        new_trades = page.review_trade()
+        new_counter = page.counter_close_trade()
+        self.assertTrue(new_trades < trades)
+        self.assertTrue(new_counter > counter)
+
+    def test_edit_trade(self):
+        LoginPage(self.driver).authorization()
+        UserPage(self.driver).open_page(UserPage.TRADING_TERMINAL_TAB)
+        self.driver.refresh()
+        page = TradingTerminalPage(self.driver)
+        page.close_all_trades()
+        page.open_trade(TradingTerminalPage.BAY_BUTTON, ',1')
+
+    def test_settings_trade(self):
+        LoginPage(self.driver).authorization()
+        UserPage(self.driver).open_page(UserPage.TRADING_TERMINAL_TAB)
+        self.driver.refresh()
+        page = TradingTerminalPage(self.driver)
+        page.open_trade(TradingTerminalPage.BAY_BUTTON, ',1')
+        time.sleep(15)
+        edit_parameters = page.edit_settings_trade()
+        time.sleep(9)
+        parameters = page.review_settings_trade()
+        print(edit_parameters)
+        print(parameters)
+        self.assertTrue(parameters == edit_parameters)
 
 
 if __name__ == '__main__':

@@ -156,13 +156,11 @@ class TestDemoAccounts(unittest.TestCase):
         self.assertEqual(table, new_result)
 
     def test_expiration_account(self):
-        wait = WebDriverWait(self.driver, 10)
         LoginPage(self.driver).authorization()
         NavigationUser(self.driver).open_page(NavigationUser.DEMO_ACCOUNTS_TAB)
         NavigationUser(self.driver).choice_wl(NavigationUser.DEV_PY)
         page = DemoAccounts(self.driver)
-        page.expiration()
-        result = wait.until(EC.presence_of_element_located(DemoAccounts.EXPIRATION)).text
+        result = page.extend_account()
         self.assertTrue(result == '30')
 
 
