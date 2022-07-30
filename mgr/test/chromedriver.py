@@ -12,7 +12,7 @@ class ChromeDriver:
     chrome_options.add_argument('--incognito')
     # chrome_options.add_argument('--lang=en-GB')
 
-    # URL = "https://mgr-dev-py.jivestor.com/login"
-    URL = "https://mgr-stage.jivestor.com/login"
+    URL = "https://mgr-dev-py.jivestor.com/login"
+    # URL = "https://mgr-stage.jivestor.com/login"
 
     

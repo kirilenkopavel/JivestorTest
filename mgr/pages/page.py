@@ -49,3 +49,8 @@ class BasePage(object):
         wait.until(EC.presence_of_element_located(sorting_type)).click()
         time.sleep(12)
 
+    def switch_tab(self, tab):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(tab)).click()
+        time.sleep(5)
+
