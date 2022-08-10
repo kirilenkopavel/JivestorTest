@@ -37,6 +37,15 @@ class TestWhiteLabels(unittest.TestCase):
                      WhiteLabels.ADD_BROKER
                      }
 
+    types_wl = {WhiteLabels.PRIVATE_WHITE_LABELS,
+                WhiteLabels.GENERAL_WHITE_LABELS,
+                WhiteLabels.HYBRID_WHITE_LABELS
+                }
+
+    business_models = {WhiteLabels.VOLUME_BASED_COMPENSATION,
+                       WhiteLabels.PERFORMANCE_BASED_COMPENSATION
+                       }
+
     def setUp(self):
         self.driver = webdriver.WebDriver(ChromeDriverManager().install(),
                                           chrome_options=ChromeDriver.chrome_options)
@@ -239,18 +248,56 @@ class TestWhiteLabels(unittest.TestCase):
         self.assertEqual(server_name, note)
 
     def test_delete_trading_server(self):
+        LoginPage(self.driver).authorization()
+        NavigationUser(self.driver).open_page(NavigationUser.WHITE_LABELS_TAB)
+        page = WhiteLabels(self.driver)
+        page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+        if page.review_trading_server() == 0:
+            page.add_trading_server()
+        trading_servers = page.review_trading_server()
+        page.delete_server()
+        new_trading_servers = page.review_trading_server()
+        self.assertTrue(new_trading_servers < trading_servers)
+
+    def test_edit_general_settings_wl(self):
         wait = WebDriverWait(self.driver, 10)
         LoginPage(self.driver).authorization()
         NavigationUser(self.driver).open_page(NavigationUser.WHITE_LABELS_TAB)
         page = WhiteLabels(self.driver)
-        try:
-            note = wait.until(EC.presence_of_element_located(WhiteLabels.CUSTOM_TRADING_SERVER)).text
-        except TimeoutException:
-            page.add_trading_server()
-            note = wait.until(EC.presence_of_element_located(WhiteLabels.CUSTOM_TRADING_SERVER)).text
-        finally:
-            page.delete_server()
-            self.assertTrue()
+        wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+        page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+        edit_name = page.edit_general_settings_wl()
+        wl_name = page.get_value(WhiteLabels.NAME_WL)
+        self.assertEqual(edit_name, wl_name)
+
+    def test_edit_wl_type(self):
+        wait = WebDriverWait(self.driver, 10)
+        LoginPage(self.driver).authorization()
+        NavigationUser(self.driver).open_page(NavigationUser.WHITE_LABELS_TAB)
+        page = WhiteLabels(self.driver)
+        for type_wl in TestWhiteLabels.types_wl:
+            wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+            page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+            edit_name = page.edit_wl_type(type_wl)
+            wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+            page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+            name_button = wait.until(EC.presence_of_element_located(WhiteLabels.WL_TYPES)).text
+            self.assertEqual(edit_name, name_button)
+
+    def test_edit_business_model(self):
+        wait = WebDriverWait(self.driver, 10)
+        LoginPage(self.driver).authorization()
+        NavigationUser(self.driver).open_page(NavigationUser.WHITE_LABELS_TAB)
+        page = WhiteLabels(self.driver)
+        for model in TestWhiteLabels.business_models:
+            wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+            page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+            edit_name = page.edit_wl_type(model)
+            wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+            page.open_settings(WhiteLabels.GENERAL_SETTINGS)
+            name_button = wait.until(EC.presence_of_element_located(WhiteLabels.BUSINESS_MODELS)).text
+            self.assertEqual(edit_name, name_button)
+
 
 if __name__ == '__main__':
     unittest.main()

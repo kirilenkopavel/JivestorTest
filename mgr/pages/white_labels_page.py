@@ -16,6 +16,7 @@ class WhiteLabels(BasePage):
     ID = (By.XPATH, '//td[@aria-colindex="2"]')
     DEACTIVATED = (By.ID, 'id="checkbox-1"')
     BROKERS = (By.XPATH, '//td[@aria-colindex="7"]/a')
+    NAME_WL = (By.XPATH, '//td[@aria-colindex="3"]')
 
     NAME_BROKER = (By.XPATH, '//td[@aria-colindex="2"]')
     SORTING_NAME = (By.XPATH, '//th[@aria-colindex="2"]')
@@ -94,7 +95,13 @@ class WhiteLabels(BasePage):
     FOOTER_DESCRIPTION = (By.ID, 'id="footer_description"')
     INVOICE_SETTINGS = (By.ID, 'id="invoice_company_data"')
     CHECK_LOGO_EDIT_WL = (By.ID, 'id="invoice_hide_logo"')
-    WL_TYPES = (By.ID, 'id="types_white_label"')
+    WL_TYPES = (By.XPATH, '///div[@class="multiselect"]//span[@class="multiselect__single"]')
+    PRIVATE_WHITE_LABELS = (By.XPATH, "//span[contains(text(), 'private white label')]")
+    GENERAL_WHITE_LABELS = (By.XPATH, "//span[contains(text(), 'general white label')]")
+    HYBRID_WHITE_LABELS = (By.XPATH, "//span[contains(text(), 'hybrid white label')]")
+    BUSINESS_MODELS = (By.XPATH, '//div[@class="multiselect multiselect--above"]//span[@class="multiselect__single"]')
+    VOLUME_BASED_COMPENSATION = (By.XPATH, "//span[contains(text(), 'volume based compensation')]")
+    PERFORMANCE_BASED_COMPENSATION = (By.XPATH, "//span[contains(text(), 'performance based compensation')]")
     CUSTOM_TRADING_SERVER = (By.XPATH, '//div[@class="trading-servers-wrapper"]//a')
     DELETE_TRADING_SERVER_BUTTON = (By.XPATH, '//div[@class="trading-servers-wrapper"]//button')
     SUBMIT_DELETE_TRADING_SERVER = (By.XPATH, '//button[@class="btn btn btn-success pl-3 pr-3 btn-secondary btn-sm"]')
@@ -105,10 +112,64 @@ class WhiteLabels(BasePage):
     ADD_TRADING_SERVER_NAME = (By.ID, 'id="add_trading_server_name"')
     ADD_TRADING_SERVER_MASK = (By.ID, 'id="add_trading_server_mask"')
     CREATE_ADD_TRADING_SERVER = (By.XPATH, '//div[@id="modal-window-add-trading-server___BV_modal_body_"]//button')
+    UPDATE_WL_BUTTON = (By.XPATH, '//div[@class="row"]//button[@class="btn btn btn-success btn-secondary btn-sm"]')
+
+    SECRET_KEY_INPUT = (By.ID, 'id="wl_secret"')
+    GENERATE_NEW_KEY = (By.XPATH, "//button[contains(text(), 'Generate a new key')]")
+    API_URL_INPUT = (By.ID, 'id="wl_webhook_url"')
+    SAVE_URL = (By.XPATH, "//button[contains(text(), 'Save URL')]")
+
+    def edit_business_model(self, model):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(WhiteLabels.BUSINESS_MODELS)).click()
+        wait.until(EC.presence_of_element_located(model)).click()
+        name_button = wait.until(EC.presence_of_element_located(WhiteLabels.BUSINESS_MODELS)).text
+        wait.until(EC.presence_of_element_located(WhiteLabels.UPDATE_WL_BUTTON)).click()
+        time.sleep(5)
+        return name_button
+
+    def edit_wl_type(self, type_):
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.presence_of_element_located(WhiteLabels.WL_TYPES)).click()
+        wait.until(EC.presence_of_element_located(type_)).click()
+        name_button = wait.until(EC.presence_of_element_located(WhiteLabels.WL_TYPES)).text
+        wait.until(EC.presence_of_element_located(WhiteLabels.UPDATE_WL_BUTTON)).click()
+        time.sleep(5)
+        return name_button
+
+    def edit_general_settings_wl(self):
+        wait = WebDriverWait(self.driver, 10)
+        page = WhiteLabels(self.driver)
+
+        name = page.edit_input(WhiteLabels.WL_NAME_INPUT)
+        page.edit_input(WhiteLabels.WL_DOMAIN_INPUT)
+        page.edit_input(WhiteLabels.WL_URL)
+        page.edit_input(WhiteLabels.WL_EMAIL)
+        page.edit_input(WhiteLabels.SERVICE_EMAIL)
+        page.edit_input(WhiteLabels.INITIALS)
+        page.edit_input(WhiteLabels.SEND_EMAILS)
+        page.edit_input(WhiteLabels.COPYRIGHT)
+
+        wait.until(EC.presence_of_element_located(WhiteLabels.LANGUAGES_ADD_WL)).click()
+        wait.until(EC.presence_of_element_located(WhiteLabels.RUS_LANGUAGE)).click()
+
+        page.edit_input(WhiteLabels.CONNECT_MESSAGE)
+        page.edit_input(WhiteLabels.FOOTER_DESCRIPTION)
+        page.edit_input(WhiteLabels.INVOICE_SETTINGS)
+
+        wait.until(EC.presence_of_element_located(WhiteLabels.UPDATE_WL_BUTTON)).click()
+        return name
+
+    def review_trading_server(self):
+        wait = WebDriverWait(self.driver, 10)
+        try:
+            notes = len(wait.until(EC.presence_of_all_elements_located(WhiteLabels.CUSTOM_TRADING_SERVER)))
+        except TimeoutException:
+            notes = 0
+        return notes
 
     def delete_trading_server(self):
         wait = WebDriverWait(self.driver, 10)
-        page = WhiteLabels(self.driver)
         wait.until(EC.presence_of_element_located(WhiteLabels.DELETE_TRADING_SERVER_BUTTON)).click()
         wait.until(EC.presence_of_element_located(WhiteLabels.SUBMIT_DELETE_TRADING_SERVER)).click()
         time.sleep(5)
@@ -245,8 +306,7 @@ class WhiteLabels(BasePage):
         wait.until(EC.presence_of_element_located(WhiteLabels.DEACTIVATED)).click()
         time.sleep(10)
 
-    def edit_general_settings(self):
-        wait = WebDriverWait(self.driver, 10)
+
 
 
 
