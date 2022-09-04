@@ -14,7 +14,7 @@ class UserPage(BasePage):
     STRATEGIES_TAB = (By.XPATH, '//a[@ui-sref="menuLayout.tradeRatingMain"]')
     TRADING_TERMINAL_TAB = (By.XPATH, '//a[@ui-sref="menuLayout.platform.terminal"]')
     STATEMENTS_TAB = (By.XPATH, '//a[@ui-sref="menuLayout.platform.statements"]')
-    LIVE_ACCOUNTS = (By.XPATH, '//a[@ui-sref="menuLayout.connectTraders"]')
+    LIVE_ACCOUNTS = (By.XPATH, '//a[@ng-if="singleBroker"]')
     ROLES = (By.ID, 'select_role')
     FOLLOWER_ROLE = '1'
     PROVIDER_ROLE = '2'

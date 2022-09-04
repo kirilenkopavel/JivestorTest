@@ -15,6 +15,9 @@ class LoginPage(BasePage):
     LOGOUT = (By.XPATH, "//*[contains(text(), 'Logout')]")
     LOGIN_BUTTON = (By.XPATH, '//div[@class="jv__page-header__enter"]/button[1]')
 
+    VALIDATION_EMAIL = (By.XPATH, '//span[@class="jv__text-input jv__text-input--invalid p-float-label p-invalid"]'
+                                  '/span[contains(text(), \'Value is required\')]')
+
     def authorization(self):
         self.driver.find_element(*LoginPage.INPUT_EMAIL).send_keys(*DataTest.EMAIL)
         self.driver.find_element(*LoginPage.INPUT_PASSWORD).send_keys(*DataTest.PASSWORD)

@@ -48,7 +48,7 @@ class TestAuthorization(unittest.TestCase):
         page = LoginPage(self.driver)
         page.login_in()
         page.forgot_password()
-        self.assertEquals('https://dev-py.jivestor.com/password-restore', self.driver.current_url)
+        self.assertEquals('https://demo.jivestor.com/password-restore', self.driver.current_url)
 
 
 if __name__ == "__main__":

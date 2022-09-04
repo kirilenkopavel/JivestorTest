@@ -46,6 +46,8 @@ class TestWhiteLabels(unittest.TestCase):
                        WhiteLabels.PERFORMANCE_BASED_COMPENSATION
                        }
 
+
+
     def setUp(self):
         self.driver = webdriver.WebDriver(ChromeDriverManager().install(),
                                           chrome_options=ChromeDriver.chrome_options)
@@ -297,6 +299,16 @@ class TestWhiteLabels(unittest.TestCase):
             page.open_settings(WhiteLabels.GENERAL_SETTINGS)
             name_button = wait.until(EC.presence_of_element_located(WhiteLabels.BUSINESS_MODELS)).text
             self.assertEqual(edit_name, name_button)
+
+    def test_edit_fees_settings(self):
+        wait = WebDriverWait(self.driver, 10)
+        LoginPage(self.driver).authorization()
+        NavigationUser(self.driver).open_page(NavigationUser.WHITE_LABELS_TAB)
+        page = WhiteLabels(self.driver)
+        wait.until(EC.presence_of_element_located(WhiteLabels.SORTING_ID)).duble_click()
+        page.open_settings(WhiteLabels.FEES_SETTINGS)
+        page.edit_fees_settings()
+
 
 
 if __name__ == '__main__':

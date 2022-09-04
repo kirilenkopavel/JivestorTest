@@ -46,7 +46,7 @@ class TestStrategiesPage(unittest.TestCase):
         self.assertEquals(20, len(element))
 
     def test_search_strategy(self):
-        StrategiesPage(self.driver).search_strategy('Rodax')
+        StrategiesPage(self.driver).search_strategy('Stripes')
         wait = WebDriverWait(self.driver, 10)
         elements = wait.until(EC.presence_of_all_elements_located(StrategiesPage.STRATEGY))
         self.assertTrue(1 == len(elements))
@@ -55,7 +55,7 @@ class TestStrategiesPage(unittest.TestCase):
 
     def test_switching_tab(self):
         for tab in TestStrategiesPage.tabs:
-            StrategiesPage(self.driver).switching_tab(self, tab)
+            StrategiesPage(self.driver).switching_tab(tab)
             if tab == StrategiesPage.TOP_GROWTH:
                 self.assertEquals('https://dev-py.jivestor.com/traders/growth', self.driver.current_url)
             elif tab == StrategiesPage.MY_FAVORITES:

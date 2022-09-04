@@ -119,6 +119,43 @@ class WhiteLabels(BasePage):
     API_URL_INPUT = (By.ID, 'id="wl_webhook_url"')
     SAVE_URL = (By.XPATH, "//button[contains(text(), 'Save URL')]")
 
+    STRATEGY_PROVIDER_INPUT = (By.ID, 'wl-sp-fee-value')
+    HIGH_RISK_ACCOUNT = (By.ID, 'wl-high-risk-fee-value')
+    DEMO_ACCOUNT = (By.ID, 'wl-demo-accounts-fee-value')
+    UNPROFITABLE_MOUTH = (By.ID, 'wl-unprofitable-month-fee-value')
+    STRATEGY_PROVIDER_SELECT = (By.ID, 'wl-sp-fee-type__BV_toggle_')
+    HIGH_RISK_SELECT = (By.ID, 'wl-high-risk-fee-type__BV_toggle_')
+    DEMO_ACCOUNT_SELECT = (By.ID, 'wl-demo-account-fee-type__BV_toggle_')
+    UNPROFITABLE_MOUTH_SELECT = (By.ID, 'wl-unprofitable-month-fee-type__BV_toggle_')
+    FEES_SETTINGS_UPDATE = (By.XPATH, "//button[contains(text(), 'Update')]")
+    OK_BUTTON = (By.XPATH, "//button[contains(text(), 'Ok')]")
+
+    def edit_fees_settings(self):
+        wait = WebDriverWait(self.driver, 10)
+        page = WhiteLabels(self.driver)
+
+        strategy_provider = page.edit_input(WhiteLabels.STRATEGY_PROVIDER_INPUT)
+        high_risk = page.edit_input(WhiteLabels.HIGH_RISK_SELECT)
+        demo_account = page.edit_input(WhiteLabels.DEMO_ACCOUNT)
+        unprofitable = page.edit_input(WhiteLabels.UNPROFITABLE_MOUTH)
+        wait.until(EC.presence_of_element_located(WhiteLabels.FEES_SETTINGS_UPDATE)).click()
+        wait.until(EC.presence_of_element_located(WhiteLabels.OK_BUTTON)).click()
+
+        result = {strategy_provider, high_risk, demo_account, unprofitable}
+        time.sleep(5)
+        return result
+
+    def value_fees_settings(self):
+        page = WhiteLabels(self.driver)
+
+        strategy_provider = page.get_value(WhiteLabels.STRATEGY_PROVIDER_INPUT)
+        high_risk = page.get_value(WhiteLabels.HIGH_RISK_SELECT)
+        demo_account = page.get_value(WhiteLabels.DEMO_ACCOUNT)
+        unprofitable = page.get_value(WhiteLabels.UNPROFITABLE_MOUTH)
+
+        result = {strategy_provider, high_risk, demo_account, unprofitable}
+        return result
+
     def edit_business_model(self, model):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.presence_of_element_located(WhiteLabels.BUSINESS_MODELS)).click()

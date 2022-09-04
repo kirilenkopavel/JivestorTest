@@ -13,8 +13,8 @@ class ChromeDriver(unittest.TestCase):
     chrome_options.add_argument('--start-maximized')
     chrome_options.add_argument('--incognito')
 
-    URL = "https://dev-py.jivestor.com/traders"
-    URL_STRATEGY = "https://dev-py.jivestor.com/performance/19613"
-    URL_PROVIDER = "https://dev-py.jivestor.com/profile/f5ea45bed2c5526c5dfafa0a5bd8d039/reviews"
+    URL = "https://demo.jivestor.com/traders"
+    URL_STRATEGY = "https://demo.jivestor.com/performance/20253"
+    URL_PROVIDER = "https://demo.jivestor.com/profile/f5ea45bed2c5526c5dfafa0a5bd8d039/reviews"
 
 
