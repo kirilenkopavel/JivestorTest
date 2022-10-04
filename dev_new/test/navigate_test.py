@@ -2,7 +2,8 @@ import unittest
 
 
 class NavigateTest(unittest.TestCase):
-    def test_something(self):
+    def test_select_role(self):
+
         self.assertEqual(True, False)  # add assertion here
 
 
